@@ -13,8 +13,14 @@ PNK_LibStub = PNK_LibStub or {
 };
 
 function PNK_LibStub:NewLibrary(major, minor)
-    assert(type(major) == "string", "Bad argument #2 to `NewLibrary' (expected string).");
-    assert(type(minor) == "number", "Bad argument #3 to `NewLibrary' (expected number).");
+    assert(
+        type(major) == "string",
+        ("Bad argument #2 to `NewLibrary' (expected string, got %q).")
+            :format(type(major)));
+    assert(
+        type(minor) == "number",
+        ("Bad argument #3 to `NewLibrary' (expected number, got %q).")
+            :format(type(minor)));
 
     local existing_revision = self.revisions[major];
     if existing_revision ~= nil and existing_revision >= minor then
@@ -27,10 +33,13 @@ function PNK_LibStub:NewLibrary(major, minor)
 end
 
 function PNK_LibStub:GetLibrary(major, silence_errors)
-    assert(type(major) == "string", "Bad argument #2 to `GetLibrary' (expected string).");
+    assert(
+        type(major) == "string",
+        ("Bad argument #2 to `GetLibrary' (expected string, got %q).")
+            :format(type(major)));
 
     if self.libraries[major] == nil and not silence_errors then
-        error(string.format("Cannot find a library instance of `%q'.", major), 2);
+        error(("Cannot find a library instance of `%q'."):format(major), 2);
     end
 
     return self.libraries[major], self.revisions[major];
