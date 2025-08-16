@@ -1,5 +1,8 @@
+-- PNK_LibStub - a minor improvement to Ace3's LibStub.
+-- Dedicated to the public domain under CC0 1.0.
+-- https://creativecommons.org/publicdomain/zero/1.0/
 local MAJOR = "PNK_LibStub";
-local MINOR = 2;
+local MINOR = 3;
 
 local lib_stub = _G[MAJOR];
 
@@ -29,6 +32,7 @@ function PNK_LibStub:NewLibrary(major, minor)
 
     self.libraries[major] = self.libraries[major] or {};
     self.revisions[major] = minor;
+
     return self.libraries[major], existing_revision;
 end
 
